@@ -5,10 +5,11 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }, format: {with: EMAIL_REGEX}
   validates :password, presence: true
-  
+  validates_presence_of :password_confirmation if :password_digest_changed?
+
   before_save :downcase_email
   private
     def downcase_email
-      email.downcase!
+      self.email.downcase!
     end
 end

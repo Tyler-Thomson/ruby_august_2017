@@ -1,0 +1,22 @@
+<h1>Dojo Secrets</h1>
+<h2>Register</h2>
+<form action="/users" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label>Name</label>
+  <div>
+    <input type="text" name="user[name]">
+  </div>
+  <label>Email</label>
+  <div>
+    <input type="email" name="user[email]">
+  </div>
+  <label>Password</label>
+  <div>
+    <input type="password" name="user[password]">
+  </div>
+  <label>Password Confirmation</label>
+  <div>
+    <input type="password" name="user[password_confirmation]">
+  </div>
+  <input type="submit" name="Register" value="Register">
+</form>
