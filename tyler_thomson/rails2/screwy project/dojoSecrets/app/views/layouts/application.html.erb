@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DojoSecrets</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if flash[:errors] %>
+    <ul>
+      <% flash[:errors].each do |e| %>
+      <li><%= e %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <% if !current_user %>
+    <a href="/register">Register</a>
+    <a href="login">Log In</a>
+  <% else %>
+    <form action="/logout" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="submit" value="Log Out">
+    </form>
+    <a href="/users/<%= current_user.id %>/edit">Edit</a>
+  <% end %>
+
+<%= yield %>
+
+</body>
+</html>
