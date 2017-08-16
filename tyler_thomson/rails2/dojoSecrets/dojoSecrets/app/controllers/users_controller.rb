@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  before_action :current_user, only: [:new]
+  before_action :current_user
   def new
+    @user = current_user
   end
 
   def create
@@ -19,6 +20,22 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = current_user
+  end
+
+  def update
+    user = current_user
+    if user.update(user_params)
+      return redirect_to "/users/#{user.id}"
+    end
+    return redirect_to :back
+  end
+
+  def destroy
+    @user = current_user
+    @user.destroy
+    session.clear
+    return redirect_to '/register'
   end
 
   private
