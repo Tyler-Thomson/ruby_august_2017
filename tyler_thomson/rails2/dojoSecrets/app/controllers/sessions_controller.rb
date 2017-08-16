@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    @user = current_user
   end
 
   def create
@@ -21,6 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
+    @user = current_user
     session.clear
     return redirect_to '/login'
   end
